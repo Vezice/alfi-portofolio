@@ -90,7 +90,7 @@
               </ul>
 
               <div class="work__links">
-                <a href="" target="_blank" class="link__text">
+                <a href="#" target="_blank" class="link__text">
                   Try it out! <span>&rarr;</span>
                 </a>
                 <a href="https://github.com/Vezice/Sign_Language_CNN_Spatial_Transformer" title="View Source Code" target="_blank">
@@ -119,10 +119,10 @@
               </ul>
 
               <div class="work__links">
-                <a href="#" class="link__text">
+                <a href="https://github.com/Vezice/alfi-portofolio/tree/main/Projects" class="link__text">
                   See the code! <span>&rarr;</span>
                 </a>
-                <a href="#">
+                <a href="https://github.com/Vezice/alfi-portofolio/blob/main/Projects/ML%20-%20Decision%20Tree.ipynb">
                   <img src="./images/google-colab.png" class="work__code" title="View Source Code" alt="Collab">
                 </a>
               </div>
@@ -145,10 +145,10 @@
               </ul>
 
               <div class="work__links">
-                <a href="#" class="link__text">
+                <a href="https://github.com/Vezice/alfi-portofolio/tree/main/Projects" class="link__text">
                   See the code! <span>&rarr;</span>
                 </a>
-                <a href="#">
+                <a href="https://github.com/Vezice/alfi-portofolio/blob/main/Projects/ANN%20-%20Backpropagation_2.ipynb">
                   <img src="./images/google-colab.svg" class="work__code" title="View Source Code" alt="Collab">
                 </a>
               </div>
@@ -201,7 +201,7 @@ way.
 
           <div class="about__photo-container">
             <!-- Add a nice photo of yourself -->
-            <img class="about__photo" src="./images/about_photo.jpg" alt="" />
+            <img class="about__photo" src="./images/about_photo.jpg" alt="about_photo" />
           </div>
         </div>
       </div>
@@ -220,7 +220,21 @@ way.
           If you're interested, let's have a chat! I always have my emails open.
         </p>
         <!-- Replace the email with yours -->
-        <a href="alfianodamarjati15@gmail.com" class="btn">Email Me!</a>
+        <!-- <a href="#" onclick="copyEmail()" class="btn">Email Me!</a> -->
+        <p id="myText">alfianodamarjati15@gmail.com</p>
+        <button class="btn" onclick="copyContent()">Email Me!</button>
+        <script>
+          let text = document.getElementById('myText').innerHTML;
+          const copyContent = async () => {
+            try {
+              await navigator.clipboard.writeText(text);
+              console.log('Content copied to clipboard');
+            } catch (err) {
+              console.error('Failed to copy: ', err);
+            }
+          }
+        </script>
+
       </div>
     </div>
   </section>
