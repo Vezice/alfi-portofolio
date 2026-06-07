@@ -212,7 +212,7 @@ export default function Journey() {
         <ol ref={olRef} className="relative space-y-6 md:space-y-10">
           <span
             aria-hidden
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-accent/30 z-0"
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/15 z-0"
           />
           <motion.span
             aria-hidden
