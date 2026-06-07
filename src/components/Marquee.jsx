@@ -1,7 +1,8 @@
 const tags = [
-  'PyTorch', 'TensorFlow', 'CNN', 'Spatial Transformers', 'Naive Bayes',
-  'Decision Trees', 'SVM', 'K-Means', 'LSTM', 'Transfer Learning',
-  'Python', 'Java', 'SQL', 'Data Analysis',
+  'Data Architecture', 'Agentic Engineering', 'Data Infrastructure',
+  'PyTorch', 'TensorFlow', 'CNN', 'Spatial Transformers',
+  'Python', 'SQL', 'Data Visualization', 'Team Leadership',
+  'System Architecture', 'Transfer Learning', 'LSTM',
 ]
 
 export default function Marquee() {

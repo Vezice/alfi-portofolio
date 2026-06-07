@@ -6,6 +6,7 @@ import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
 import Projects from './components/Projects.jsx'
 import Journey from './components/Journey.jsx'
+import Credentials from './components/Credentials.jsx'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
@@ -34,6 +35,7 @@ export default function App() {
         <Marquee />
         <Projects />
         <Journey />
+        <Credentials />
         <About />
         <Contact />
       </main>

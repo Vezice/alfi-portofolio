@@ -2,39 +2,70 @@ import { motion } from 'framer-motion'
 
 const milestones = [
   {
-    year: '2019',
-    title: 'Started Informatics Engineering',
-    body: 'Began undergraduate studies in Informatics Engineering, falling for the practical side of computer science — algorithms, data structures, the way code becomes systems.',
+    year: 'Aug 2019',
+    tag: 'Education',
+    title: 'B.S. Informatics — University of Brawijaya',
+    body: 'Started undergraduate studies in Informatics in Malang. The foundation that everything else builds on — algorithms, systems, the way code becomes products.',
   },
   {
-    year: '2020',
-    title: 'First taste of ML',
-    body: 'Discovered machine learning through coursework — Naive Bayes, decision trees, the simple ideas that kick off the field. Started building classifiers from scratch in Python.',
+    year: 'Mar 2022',
+    tag: 'Coursera',
+    title: 'Mathematics for ML + Google IT Automation with Python',
+    body: 'Mathematics for Machine Learning (Imperial College London) and Google IT Automation with Python — closing the math gap and learning to script real systems.',
   },
   {
-    year: '2021',
-    title: 'Deep learning rabbit hole',
-    body: 'Backpropagation, CNNs, the Iris and MNIST classics. Implemented a backprop ANN from scratch and watched it converge — that moment hooked me.',
+    year: 'Apr 2022',
+    tag: 'DeepLearning.AI',
+    title: 'TensorFlow Developer track',
+    body: 'Three Coursera specializations from DeepLearning.AI: Structuring ML Projects, TensorFlow Developer, and TensorFlow: Data and Deployment. The end-to-end ML toolkit.',
   },
   {
-    year: '2022',
-    title: 'Research: Sign Language CNN',
-    body: 'Designed and trained a real-time ASL recognition system combining a CNN with a Spatial Transformer Network. Published the work in a peer-reviewed journal.',
+    year: 'Feb – Aug 2022',
+    tag: 'Bangkit Academy',
+    title: 'ML cohort — Google, Tokopedia, Gojek, Traveloka',
+    body: 'Selected for the Bangkit Academy ML track, an intensive 7-month program backed by Indonesia\'s top tech companies. Deep learning in Python and TensorFlow, end to end.',
   },
   {
-    year: '2023',
-    title: 'Production data work',
-    body: 'Moved from notebooks to production — building data pipelines, working with SQL at scale, and learning how models actually live in real systems.',
+    year: 'Aug 2022 – Jun 2023',
+    tag: 'Research',
+    title: 'Sign Language CNN + Spatial Transformer',
+    body: 'Final project for my degree: real-time ASL alphabet recognition combining a CNN with a Spatial Transformer Network. Trained in PyTorch.',
   },
   {
-    year: '2024',
-    title: 'Broadening the toolkit',
-    body: 'Transfer learning, LSTM sequence models, transformer architectures. Started treating models as components in a larger system rather than the system itself.',
+    year: 'Aug 2023',
+    tag: 'Degree',
+    title: 'Graduated S.Kom., GPA 3.63',
+    body: 'Completed the four-year Informatics degree at Brawijaya. The research project became the basis for what I\'d present a few months later.',
   },
   {
-    year: 'Now',
-    title: 'Looking for the next chapter',
-    body: 'Open to ML / DL / data roles where I can ship models that matter — and keep learning from the people around me.',
+    year: 'Oct 2023',
+    tag: 'Conference',
+    title: 'SENTRIN 2023 — paper presented',
+    body: 'Presented the Sign Language CNN + Spatial Transformer work at the Seminar Nasional Teknologi dan Rekayasa Informasi (SENTRIN), University of Brawijaya.',
+  },
+  {
+    year: 'Oct 2024',
+    tag: 'AHA Commerce',
+    title: 'Joined as Intern — Data Analyst',
+    body: 'Stepped into the world of e-commerce data. Detected and located performance problems for brands, working alongside the Business Data Specialist.',
+  },
+  {
+    year: 'Feb 2025',
+    tag: 'AHA Commerce',
+    title: 'Promoted to Business Data Analyst',
+    body: 'Took ownership of solving the issues that were halting brand growth. End-to-end: from spotting the problem in the data to shipping the fix.',
+  },
+  {
+    year: 'Jun 2025',
+    tag: 'AHA Commerce',
+    title: 'Senior Business Data Analyst — leading the FBI team',
+    body: 'Started guiding and mentoring a specialized team of business data analysts (the FBI) to optimize brand performance and resolve operational bottlenecks at scale.',
+  },
+  {
+    year: '2026 — Now',
+    tag: 'Current',
+    title: 'Data & AI Architect',
+    body: 'Scaling the engineering and data team from 3 to 12 people. Designing the data infrastructure and organizational frameworks that let everyone execute with speed and precision — and starting to wire in agentic systems.',
   },
 ]
 
@@ -54,7 +85,7 @@ export default function Journey() {
             From <span className="italic font-light text-accent">2019</span> to now.
           </h2>
           <p className="mt-6 max-w-2xl text-bone-dim text-lg text-pretty">
-            A rough timeline — placeholder text for now. Share the details from your LinkedIn and I'll fill this in properly.
+            Brawijaya → Bangkit → published research → AHA Commerce. Six years of building, learning, and growing into the architect role.
           </p>
         </motion.div>
 
@@ -65,12 +96,19 @@ export default function Journey() {
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-80px' }}
-              transition={{ duration: 0.6, delay: i * 0.05 }}
+              transition={{ duration: 0.6, delay: i * 0.04 }}
               className="relative pl-8 md:pl-12 pb-12 md:pb-16 last:pb-0"
             >
               <span className="absolute -left-[7px] top-1.5 h-3 w-3 rounded-full bg-accent ring-4 ring-ink-soft" />
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-2">{m.year}</p>
-              <h3 className="font-display text-2xl md:text-3xl font-bold mb-3">{m.title}</h3>
+              <div className="flex items-center gap-3 mb-2 flex-wrap">
+                <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">{m.year}</p>
+                {m.tag && (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-bone-dim border border-white/10 rounded-full px-2.5 py-0.5">
+                    {m.tag}
+                  </span>
+                )}
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl font-bold mb-3 text-balance">{m.title}</h3>
               <p className="text-bone-dim max-w-xl text-pretty">{m.body}</p>
             </motion.li>
           ))}

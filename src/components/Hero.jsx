@@ -24,11 +24,11 @@ export default function Hero() {
           className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-8"
         >
           <span className="inline-block h-2 w-2 rounded-full bg-accent animate-pulse mr-3 align-middle" />
-          Available for ML / Data roles
+          Data &amp; AI Architect — AHA Commerce, Jakarta
         </motion.p>
 
         <h1 className="font-display text-[clamp(3rem,11vw,11rem)] leading-[0.9] tracking-tight font-black text-balance">
-          {['Building', 'machines', 'that', 'learn.'].map((w, i) => (
+          {['Architecting', 'data', 'systems', 'that', 'scale.'].map((w, i) => (
             <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.2em]">
               <motion.span variants={word} initial="hidden" animate="show" custom={i} className="inline-block">
                 {i === 1 ? <span className="italic font-light text-accent">{w}</span> : w}
@@ -44,7 +44,7 @@ export default function Hero() {
             transition={{ delay: 0.9, duration: 0.6 }}
             className="text-bone-dim text-lg md:text-xl max-w-md text-pretty"
           >
-            I'm <span className="text-bone">Alfiano Mahardika</span> — a machine learning and deep learning engineer working with computer vision, neural nets, and the practical mess of getting models into production.
+            I'm <span className="text-bone">Alfiano Mahardika</span> — designing the data infrastructure and organizational frameworks that let engineering and analytics teams execute with speed and precision.
           </motion.p>
 
           <motion.div

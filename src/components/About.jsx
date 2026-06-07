@@ -34,17 +34,17 @@ export default function About() {
         >
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-4">— About</p>
           <h2 className="font-display text-5xl md:text-7xl font-black tracking-tight mb-8 text-balance">
-            Curious by default, <span className="italic font-light text-accent">stubborn</span> about the details.
+            Aligning <span className="italic font-light text-accent">infrastructure</span> with autonomy.
           </h2>
           <div className="space-y-5 text-bone-dim text-lg text-pretty max-w-2xl">
             <p>
-              I'm adept at data science and the practical use of machine learning and deep learning — Naïve Bayes, decision trees, CNNs, sequence models, and everything in the gap between a clean notebook and a working system.
+              Building scalable technology requires aligning predictable data infrastructure with high team autonomy. As a Data &amp; AI Architect, my focus is on designing the technical systems and the organizational frameworks that allow engineering and analytical divisions to execute with speed and precision.
             </p>
             <p>
-              My day-to-day languages are Python, Java, and SQL. I gravitate toward problems where the data is messy, the metric is unclear, and shipping something useful means making hard choices.
+              My background is in machine learning and deep learning — CNNs, sequence models, the math underneath them — and I've spent the last year-plus translating that into production data work at AHA Commerce, growing from intern to senior analyst to architect as the team scaled from three people to twelve.
             </p>
             <p>
-              I started in Informatics Engineering and never stopped trying to learn the next thing. That's the whole pitch.
+              I work in Python, SQL, and increasingly in the design space between systems and the people who use them. Curious by default, stubborn about the details.
             </p>
           </div>
           <div className="mt-10 flex flex-wrap gap-4">
