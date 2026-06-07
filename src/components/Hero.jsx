@@ -67,11 +67,11 @@ export default function Hero() {
 
         <h1
           ref={headingRef}
-          className="hero-headline font-display text-[clamp(2.25rem,7.5vw,8rem)] leading-[0.95] tracking-tight font-black text-balance"
+          className="hero-headline font-display text-[clamp(2.25rem,7.5vw,8rem)] leading-[1.1] tracking-tight font-black text-balance"
           style={{ '--mx': '-9999px', '--my': '-9999px' }}
         >
           {HEADLINE.map((w, i) => (
-            <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.2em]">
+            <span key={i} className="inline-block overflow-hidden align-bottom mr-[0.2em] pb-[0.15em]">
               <motion.span variants={word} initial="hidden" animate="show" custom={i} className="inline-block">
                 {w === 'Data' || w === 'AI' ? <span className="italic font-light">{w}</span> : w}
               </motion.span>
