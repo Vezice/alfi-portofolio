@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const milestones = [
@@ -87,14 +87,20 @@ const gradients = [
   'linear-gradient(135deg, #ff4d6d 0%, #4dd4ff 100%)',
 ]
 
-function MilestoneRow({ m, i, rowRef }) {
+function MilestoneRow({ m, i }) {
+  const ref = useRef(null)
   const { scrollYProgress } = useScroll({
-    target: rowRef,
+    target: ref,
     offset: ['start end', 'end start'],
   })
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.92, 1.02, 0.96])
-  const y = useTransform(scrollYProgress, [0, 1], [40, -40])
+  const yOffset = useTransform(scrollYProgress, [0, 1], [40, -40])
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3])
+
+  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.5])
+  const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
+  const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
+  const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
 
   const flipped = i % 2 === 1
   const imageClasses = flipped
@@ -106,11 +112,23 @@ function MilestoneRow({ m, i, rowRef }) {
 
   return (
     <motion.li
-      ref={rowRef}
+      ref={ref}
       style={{ opacity }}
-      className="relative grid md:grid-cols-12 gap-x-12 md:gap-x-16 gap-y-6 items-center py-10 md:py-20 pl-12 md:pl-0"
+      className="relative w-full box-border grid md:grid-cols-12 gap-x-12 md:gap-x-16 gap-y-6 items-center py-10 md:py-20 pl-12 md:pl-0"
     >
-      <motion.div style={{ scale, y }} className={`relative z-10 ${imageClasses}`}>
+      <motion.span
+        aria-hidden
+        style={{ scale: dotScale, backgroundColor: dotColor }}
+        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full z-30 flex items-center justify-center pointer-events-none"
+      >
+        <motion.span
+          aria-hidden
+          style={{ opacity: dotInnerOpacity, scale: dotInnerScale }}
+          className="block h-1.5 w-1.5 rounded-full bg-white"
+        />
+      </motion.span>
+
+      <motion.div style={{ scale, y: yOffset }} className={`relative z-10 ${imageClasses}`}>
         <div
           className={`relative w-full aspect-video rounded-2xl overflow-hidden border ${m.featured ? 'border-accent/50' : 'border-white/10'} shadow-2xl shadow-black/40`}
           style={{ background: gradients[i % gradients.length] }}
@@ -154,74 +172,15 @@ function MilestoneRow({ m, i, rowRef }) {
   )
 }
 
-function MilestoneDot({ rowRef, top }) {
-  const { scrollYProgress } = useScroll({
-    target: rowRef,
-    offset: ['start end', 'end start'],
-  })
-  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.4])
-  const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
-  const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
-  const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
-
-  return (
-    <motion.span
-      aria-hidden
-      style={{
-        top: `${top}px`,
-        scale: dotScale,
-        backgroundColor: dotColor,
-      }}
-      className="absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full z-30 flex items-center justify-center pointer-events-none"
-    >
-      <motion.span
-        aria-hidden
-        style={{ opacity: dotInnerOpacity, scale: dotInnerScale }}
-        className="block h-1.5 w-1.5 rounded-full bg-white"
-      />
-    </motion.span>
-  )
-}
-
 export default function Journey() {
   const olRef = useRef(null)
-  const rowRefs = useRef(milestones.map(() => ({ current: null })))
-  const [tops, setTops] = useState(() => milestones.map(() => 0))
-
   const { scrollYProgress } = useScroll({
     target: olRef,
     offset: ['start center', 'end center'],
   })
+  const fillHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const indicatorTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0])
-
-  useEffect(() => {
-    const measure = () => {
-      const ol = olRef.current
-      if (!ol) return
-      const olRect = ol.getBoundingClientRect()
-      const next = rowRefs.current.map((ref) => {
-        const el = ref.current
-        if (!el) return 0
-        const r = el.getBoundingClientRect()
-        return r.top - olRect.top + r.height / 2
-      })
-      setTops(next)
-    }
-    measure()
-    window.addEventListener('resize', measure)
-    const ro = new ResizeObserver(measure)
-    if (olRef.current) ro.observe(olRef.current)
-    rowRefs.current.forEach((ref) => {
-      if (ref.current) ro.observe(ref.current)
-    })
-    const id = setTimeout(measure, 100)
-    return () => {
-      window.removeEventListener('resize', measure)
-      ro.disconnect()
-      clearTimeout(id)
-    }
-  }, [])
 
   return (
     <section id="journey" className="relative bg-ink-soft py-24 md:py-40 border-y border-white/5 overflow-hidden">
@@ -253,21 +212,22 @@ export default function Journey() {
         <ol ref={olRef} className="relative space-y-6 md:space-y-10">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-accent z-0"
-          />
-
-          {milestones.map((m, i) => (
-            <MilestoneDot key={`dot-${i}`} rowRef={rowRefs.current[i]} top={tops[i]} />
-          ))}
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-1 -translate-x-1/2 bg-white/15 rounded-full z-0"
+          >
+            <motion.div
+              style={{ height: fillHeight }}
+              className="absolute top-0 left-0 w-full bg-accent rounded-full"
+            />
+          </div>
 
           <motion.span
             aria-hidden
             style={{ top: indicatorTop, opacity: indicatorOpacity }}
-            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-bone z-40"
+            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-bone shadow-[0_0_12px_rgba(245,241,234,0.6)] z-40"
           />
 
           {milestones.map((m, i) => (
-            <MilestoneRow key={m.year + i} m={m} i={i} rowRef={rowRefs.current[i]} />
+            <MilestoneRow key={m.year + i} m={m} i={i} />
           ))}
         </ol>
       </div>
