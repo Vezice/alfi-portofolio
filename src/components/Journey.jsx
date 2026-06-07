@@ -179,8 +179,6 @@ export default function Journey() {
     offset: ['start center', 'end center'],
   })
   const fillHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-  const indicatorTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
-  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0])
 
   return (
     <section id="journey" className="relative bg-ink-soft py-24 md:py-40 border-y border-white/5 overflow-hidden">
@@ -219,12 +217,6 @@ export default function Journey() {
               className="absolute top-0 left-0 w-full bg-accent rounded-full"
             />
           </div>
-
-          <motion.span
-            aria-hidden
-            style={{ top: indicatorTop, opacity: indicatorOpacity }}
-            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-bone shadow-[0_0_12px_rgba(245,241,234,0.6)] z-40"
-          />
 
           {milestones.map((m, i) => (
             <MilestoneRow key={m.year + i} m={m} i={i} />
