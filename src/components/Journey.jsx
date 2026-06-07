@@ -97,25 +97,35 @@ function MilestoneRow({ m, i }) {
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [baseScale - 0.06, baseScale + 0.06, baseScale - 0.04])
   const y = useTransform(scrollYProgress, [0, 1], [40, -40])
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3])
+
+  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.6])
+  const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
+  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 18px rgba(255,77,109,0.7)'])
+
   const flipped = i % 2 === 1
 
-  const imageClasses = m.featured
-    ? (flipped ? 'md:col-span-8 md:col-start-1 md:row-start-1' : 'md:col-span-8 md:col-start-5 md:row-start-1')
-    : (flipped ? 'md:col-span-7 md:col-start-1 md:row-start-1' : 'md:col-span-7 md:col-start-6 md:row-start-1')
-
-  const textClasses = m.featured
-    ? (flipped ? 'md:col-span-4 md:col-start-9 md:row-start-1' : 'md:col-span-4 md:col-start-1 md:row-start-1')
-    : (flipped ? 'md:col-span-5 md:col-start-8 md:row-start-1' : 'md:col-span-5 md:col-start-1 md:row-start-1')
+  const imageClasses = flipped
+    ? 'md:col-span-5 md:col-start-1 md:row-start-1'
+    : 'md:col-span-5 md:col-start-8 md:row-start-1'
+  const textClasses = flipped
+    ? 'md:col-span-5 md:col-start-8 md:row-start-1'
+    : 'md:col-span-5 md:col-start-1 md:row-start-1'
 
   return (
     <motion.li
       ref={ref}
       style={{ opacity }}
-      className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-center py-10 md:py-20"
+      className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-center py-10 md:py-20 pl-12 md:pl-0"
     >
-      <motion.div style={{ scale, y }} className={imageClasses}>
+      <motion.span
+        aria-hidden
+        style={{ scale: dotScale, backgroundColor: dotColor, boxShadow: dotGlow }}
+        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-ink-soft z-30"
+      />
+
+      <motion.div style={{ scale, y }} className={`relative z-10 ${imageClasses}`}>
         <div
-          className="relative w-full aspect-video rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/40"
+          className={`relative w-full ${m.featured ? 'aspect-[4/3]' : 'aspect-video'} rounded-2xl overflow-hidden border ${m.featured ? 'border-accent/40' : 'border-white/10'} shadow-2xl shadow-black/40`}
           style={{ background: gradients[i % gradients.length] }}
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-ink/40 via-transparent to-transparent" />
@@ -139,7 +149,7 @@ function MilestoneRow({ m, i }) {
         </div>
       </motion.div>
 
-      <div className={textClasses}>
+      <div className={`relative z-10 ${textClasses}`}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -158,6 +168,12 @@ function MilestoneRow({ m, i }) {
 }
 
 export default function Journey() {
+  const olRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: olRef,
+    offset: ['start center', 'end center'],
+  })
+
   return (
     <section id="journey" className="relative bg-ink-soft py-24 md:py-40 border-y border-white/5 overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 md:px-10">
@@ -177,7 +193,17 @@ export default function Journey() {
           </p>
         </motion.div>
 
-        <ol className="space-y-6 md:space-y-10">
+        <ol ref={olRef} className="relative space-y-6 md:space-y-10">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-px z-0"
+          />
+          <motion.span
+            aria-hidden
+            style={{ scaleY: scrollYProgress }}
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-accent origin-top md:-translate-x-px z-0"
+          />
+
           {milestones.map((m, i) => (
             <MilestoneRow key={m.year + i} m={m} i={i} />
           ))}

@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import MagneticButton from './MagneticButton.jsx'
 
@@ -15,20 +15,36 @@ const HEADLINE = ['Architecting', 'Data', 'Infrastructure', 'and', 'AI', 'Agenti
 
 export default function Hero() {
   const headingRef = useRef(null)
+  const lastMouse = useRef({ x: -9999, y: -9999 })
 
-  const onHeadingMove = (e) => {
-    const el = headingRef.current
-    if (!el) return
-    const r = el.getBoundingClientRect()
-    el.style.setProperty('--mx', `${e.clientX - r.left}px`)
-    el.style.setProperty('--my', `${e.clientY - r.top}px`)
-  }
-  const onHeadingLeave = () => {
-    const el = headingRef.current
-    if (!el) return
-    el.style.setProperty('--mx', `-9999px`)
-    el.style.setProperty('--my', `-9999px`)
-  }
+  useEffect(() => {
+    const sync = () => {
+      const el = headingRef.current
+      if (!el) return
+      const r = el.getBoundingClientRect()
+      const x = lastMouse.current.x - r.left
+      const y = lastMouse.current.y - r.top
+      const pad = 60
+      if (x < -pad || y < -pad || x > r.width + pad || y > r.height + pad) {
+        el.style.setProperty('--mx', '-9999px')
+        el.style.setProperty('--my', '-9999px')
+      } else {
+        el.style.setProperty('--mx', `${x}px`)
+        el.style.setProperty('--my', `${y}px`)
+      }
+    }
+    const onMove = (e) => {
+      lastMouse.current = { x: e.clientX, y: e.clientY }
+      sync()
+    }
+    const onScroll = () => sync()
+    window.addEventListener('mousemove', onMove)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [])
 
   return (
     <section id="top" className="relative isolate mesh-bg min-h-screen flex items-center overflow-hidden">
@@ -51,8 +67,6 @@ export default function Hero() {
 
         <h1
           ref={headingRef}
-          onMouseMove={onHeadingMove}
-          onMouseLeave={onHeadingLeave}
           className="hero-headline font-display text-[clamp(2.25rem,7.5vw,8rem)] leading-[0.95] tracking-tight font-black text-balance"
           style={{ '--mx': '-9999px', '--my': '-9999px' }}
         >
