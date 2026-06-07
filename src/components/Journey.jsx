@@ -99,7 +99,7 @@ function MilestoneRow({ m, i }) {
 
   const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.4])
   const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
-  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 14px rgba(255,77,109,0.85)'])
+  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 8px rgba(255,77,109,0.7)'])
   const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
   const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
 
@@ -212,12 +212,12 @@ export default function Journey() {
         <ol ref={olRef} className="relative space-y-6 md:space-y-10">
           <span
             aria-hidden
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/25 z-0"
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-accent/30 z-0"
           />
           <motion.span
             aria-hidden
             style={{ scaleY: scrollYProgress }}
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-accent origin-top z-0"
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-accent origin-top z-0"
           />
 
           <motion.span
