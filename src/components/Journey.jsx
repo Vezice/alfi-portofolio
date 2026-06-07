@@ -193,8 +193,8 @@ export default function Journey() {
           <h2 className="font-display text-5xl md:text-8xl font-black tracking-tight text-balance">
             From <span className="italic font-light text-accent">2019</span> to now.
           </h2>
-          <p className="mt-6 max-w-3xl text-bone-dim text-lg text-pretty">
-            <span className="text-bone">Graduated</span> →{' '}
+          <p className="mt-6 max-w-5xl text-bone-dim text-lg text-pretty">
+            <span className="text-accent font-medium">Graduated</span> →{' '}
             <span className="text-accent font-medium">Brawijaya University</span> →{' '}
             <span className="text-accent font-medium">Bangkit Academy</span> →{' '}
             <span className="text-accent font-medium">Published Research</span> →{' '}
