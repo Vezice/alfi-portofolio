@@ -49,7 +49,7 @@ function FeaturedCard({ c, idx }) {
 
       <div className="relative z-10 flex items-start justify-between gap-4">
         <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/90 rounded-full bg-black/30 backdrop-blur px-3 py-1.5 border border-white/20">
-          Featured · {c.date}
+          {c.date}
         </span>
         <span aria-hidden className="h-8 w-8 rounded-full grid place-items-center border border-white/40 bg-black/30 backdrop-blur text-white">
           ✓

@@ -93,14 +93,13 @@ function MilestoneRow({ m, i }) {
     target: ref,
     offset: ['start end', 'end start'],
   })
-  const baseScale = m.featured ? 1.04 : 0.94
-  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [baseScale - 0.06, baseScale + 0.06, baseScale - 0.04])
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [0.92, 1.02, 0.96])
   const y = useTransform(scrollYProgress, [0, 1], [40, -40])
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3])
 
-  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.9])
+  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.4])
   const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
-  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 20px rgba(255,77,109,0.8)'])
+  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 14px rgba(255,77,109,0.85)'])
   const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
   const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
 
@@ -121,18 +120,18 @@ function MilestoneRow({ m, i }) {
       <motion.span
         aria-hidden
         style={{ scale: dotScale, backgroundColor: dotColor, boxShadow: dotGlow }}
-        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-ink-soft z-30 flex items-center justify-center"
+        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full z-30 flex items-center justify-center"
       >
         <motion.span
           aria-hidden
           style={{ opacity: dotInnerOpacity, scale: dotInnerScale }}
-          className="block h-1.5 w-1.5 rounded-full bg-white"
+          className="block h-1 w-1 rounded-full bg-white"
         />
       </motion.span>
 
       <motion.div style={{ scale, y }} className={`relative z-10 ${imageClasses}`}>
         <div
-          className={`relative w-full ${m.featured ? 'aspect-[5/4]' : 'aspect-video'} rounded-2xl overflow-hidden border ${m.featured ? 'border-accent/40' : 'border-white/10'} shadow-2xl shadow-black/40`}
+          className={`relative w-full aspect-video rounded-2xl overflow-hidden border ${m.featured ? 'border-accent/50' : 'border-white/10'} shadow-2xl shadow-black/40`}
           style={{ background: gradients[i % gradients.length] }}
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-ink/40 via-transparent to-transparent" />
@@ -198,15 +197,15 @@ export default function Journey() {
             From <span className="italic font-light text-accent">2019</span> to now.
           </h2>
           <p className="mt-6 max-w-3xl text-bone-dim text-lg text-pretty">
-            <span className="text-bone">Graduation</span> —{' '}
+            <span className="text-bone">Graduated</span> →{' '}
             <span className="text-accent font-medium">Brawijaya University</span> →{' '}
             <span className="text-accent font-medium">Bangkit Academy</span> →{' '}
-            <span className="text-accent font-medium">Published Research at SENTRIN</span> →{' '}
-            <span className="text-accent font-medium">AHA Commerce</span>. Six years of building, learning, and{' '}
+            <span className="text-accent font-medium">Published Research</span> →{' '}
+            <span className="text-accent font-medium">AHA Commerce</span>.
+            <br />
+            Six years of building, learning, and{' '}
             <span className="text-bone underline decoration-accent decoration-2 underline-offset-4">leading</span>{' '}
-            into the{' '}
-            <span className="text-bone underline decoration-accent decoration-2 underline-offset-4">architect</span>{' '}
-            role.
+            into the architect role.
           </p>
         </motion.div>
 
@@ -224,10 +223,8 @@ export default function Journey() {
           <motion.span
             aria-hidden
             style={{ top: indicatorTop, opacity: indicatorOpacity }}
-            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent shadow-[0_0_28px_rgba(255,77,109,0.9)] z-40 you-are-here"
-          >
-            <span aria-hidden className="absolute inset-0 rounded-full bg-accent animate-ping opacity-50" />
-          </motion.span>
+            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_18px_rgba(255,77,109,0.9)] z-40"
+          />
 
           {milestones.map((m, i) => (
             <MilestoneRow key={m.year + i} m={m} i={i} />
