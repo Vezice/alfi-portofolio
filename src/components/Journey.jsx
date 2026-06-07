@@ -181,6 +181,7 @@ export default function Journey() {
   })
   const indicatorTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0])
+  const fillHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   return (
     <section id="journey" className="relative bg-ink-soft py-24 md:py-40 border-y border-white/5 overflow-hidden">
@@ -210,15 +211,15 @@ export default function Journey() {
         </motion.div>
 
         <ol ref={olRef} className="relative space-y-6 md:space-y-10">
-          <span
+          <div
             aria-hidden
             className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/15 z-0"
-          />
-          <motion.span
-            aria-hidden
-            style={{ scaleY: scrollYProgress }}
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-accent origin-top z-0"
-          />
+          >
+            <motion.div
+              style={{ height: fillHeight }}
+              className="absolute top-0 left-0 w-full bg-accent"
+            />
+          </div>
 
           <motion.span
             aria-hidden
