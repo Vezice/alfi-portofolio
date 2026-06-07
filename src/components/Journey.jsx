@@ -161,7 +161,6 @@ function MilestoneDot({ rowRef, top }) {
   })
   const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.4])
   const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
-  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 10px rgba(255,77,109,0.7)'])
   const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
   const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
 
@@ -172,7 +171,6 @@ function MilestoneDot({ rowRef, top }) {
         top: `${top}px`,
         scale: dotScale,
         backgroundColor: dotColor,
-        boxShadow: dotGlow,
       }}
       className="absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full z-30 flex items-center justify-center pointer-events-none"
     >
@@ -196,7 +194,6 @@ export default function Journey() {
   })
   const indicatorTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
   const indicatorOpacity = useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0])
-  const fillHeight = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
 
   useEffect(() => {
     const measure = () => {
@@ -256,13 +253,8 @@ export default function Journey() {
         <ol ref={olRef} className="relative space-y-6 md:space-y-10">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-white/15 z-0"
-          >
-            <motion.div
-              style={{ height: fillHeight }}
-              className="absolute top-0 left-0 w-full bg-accent"
-            />
-          </div>
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 -translate-x-1/2 bg-accent/50 z-0"
+          />
 
           {milestones.map((m, i) => (
             <MilestoneDot key={`dot-${i}`} rowRef={rowRefs.current[i]} top={tops[i]} />
@@ -271,7 +263,7 @@ export default function Journey() {
           <motion.span
             aria-hidden
             style={{ top: indicatorTop, opacity: indicatorOpacity }}
-            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-accent shadow-[0_0_12px_rgba(255,77,109,0.9)] z-40"
+            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-bone z-40"
           />
 
           {milestones.map((m, i) => (
