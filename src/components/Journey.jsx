@@ -98,7 +98,6 @@ function MilestoneRow({ m, i }) {
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3])
 
   const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.5])
-  const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
   const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
   const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
 
@@ -118,8 +117,8 @@ function MilestoneRow({ m, i }) {
     >
       <motion.span
         aria-hidden
-        style={{ scale: dotScale, backgroundColor: dotColor }}
-        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full z-30 flex items-center justify-center pointer-events-none"
+        style={{ scale: dotScale }}
+        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full bg-accent z-30 flex items-center justify-center pointer-events-none"
       >
         <motion.span
           aria-hidden
