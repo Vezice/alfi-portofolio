@@ -25,14 +25,15 @@ function SocialPill({ s }) {
       rel="noreferrer"
       title={s.label}
       aria-label={s.label}
-      className="group relative h-10 inline-flex items-center rounded-full border border-white/15 hover:border-accent hover:bg-accent/10 transition-[max-width,padding,background-color,border-color] duration-300 ease-out overflow-hidden max-w-[40px] hover:max-w-[160px] pl-3 pr-3"
+      className="group relative h-10 w-10 inline-flex items-center justify-center rounded-full border border-white/20 hover:border-accent hover:bg-accent/10 transition-colors duration-200"
     >
       <img
         src={s.icon}
         alt=""
-        className="h-4 w-4 invert opacity-80 group-hover:opacity-100 shrink-0 transition-opacity"
+        className="h-4 w-4 shrink-0 opacity-90 group-hover:opacity-100 transition-opacity"
+        style={{ filter: 'brightness(0) invert(1)' }}
       />
-      <span className="ml-0 group-hover:ml-2 whitespace-nowrap text-xs font-medium tracking-wide overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-75">
+      <span className="pointer-events-none absolute top-full left-1/2 -translate-x-1/2 mt-3 opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 bg-ink-soft border border-white/15 text-bone text-[10px] font-mono uppercase tracking-[0.2em] px-2.5 py-1 rounded-full whitespace-nowrap">
         {s.label}
       </span>
     </a>
@@ -72,7 +73,7 @@ export default function Nav() {
           ))}
         </nav>
         <div className="flex items-center gap-2 shrink-0">
-          <div className="hidden sm:flex items-center gap-2">
+          <div className="hidden sm:flex items-center gap-3">
             {socials.map((s) => (
               <SocialPill key={s.label} s={s} />
             ))}

@@ -34,7 +34,7 @@ function FeaturedCard({ c, idx }) {
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: false, margin: '-60px' }}
       transition={{ duration: 0.6 }}
       className="group relative sm:col-span-2 lg:col-span-2 p-7 md:p-10 rounded-2xl border border-white/15 overflow-hidden min-h-[260px] flex flex-col justify-between"
       style={{ background: c.bg }}
@@ -72,7 +72,7 @@ function StandardCard({ c, idx }) {
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
+      viewport={{ once: false, margin: '-60px' }}
       transition={{ duration: 0.5, delay: (idx % 3) * 0.06 }}
       className="group relative p-6 md:p-7 rounded-2xl border border-white/5 bg-ink-soft/50 hover:border-accent transition-colors overflow-hidden"
     >
@@ -98,7 +98,7 @@ export default function Credentials() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: false, margin: '-100px' }}
           transition={{ duration: 0.7 }}
           className="mb-16 md:mb-24 flex items-end justify-between gap-8 flex-wrap"
         >

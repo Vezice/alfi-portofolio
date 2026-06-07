@@ -84,6 +84,13 @@
     50%      { opacity: 1;    transform: translate(-50%, 4px); }
   }
 
+  .dot-grid {
+    background-image: radial-gradient(rgba(245, 241, 234, 0.08) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+  }
+
   .hero-headline {
     background-image:
       radial-gradient(

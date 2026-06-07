@@ -46,6 +46,7 @@ function ProjectCard({ p, i }) {
   })
   const y = useTransform(scrollYProgress, [0, 1], [60, -60])
   const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.4, 1, 1, 0.4])
+  const watermarkY = useTransform(scrollYProgress, [0, 1], [120, -120])
   const flipped = i % 2 === 1
 
   return (
@@ -54,7 +55,15 @@ function ProjectCard({ p, i }) {
       style={{ opacity }}
       className="group relative grid md:grid-cols-12 gap-8 md:gap-12 items-center py-16 md:py-28 border-b border-white/5"
     >
-      <div className={`md:col-span-6 ${flipped ? 'md:order-2' : ''}`}>
+      <motion.span
+        aria-hidden
+        style={{ y: watermarkY }}
+        className={`pointer-events-none absolute z-0 font-display font-black select-none text-bone/[0.04] text-[18rem] md:text-[28rem] leading-none top-1/2 -translate-y-1/2 ${flipped ? 'right-0 md:-right-10' : 'left-0 md:-left-10'}`}
+      >
+        {p.no}
+      </motion.span>
+
+      <div className={`relative z-10 md:col-span-6 ${flipped ? 'md:order-2' : ''}`}>
         <motion.div
           style={{ y }}
           className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-ink-soft border border-white/5"
@@ -70,7 +79,7 @@ function ProjectCard({ p, i }) {
         </motion.div>
       </div>
 
-      <div className={`md:col-span-6 ${flipped ? 'md:order-1' : ''}`}>
+      <div className={`relative z-10 md:col-span-6 ${flipped ? 'md:order-1' : ''}`}>
         <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-3">{p.subtitle}</p>
         <h3 className="font-display text-4xl md:text-6xl font-black tracking-tight mb-6 text-balance">
           {p.title}
@@ -109,17 +118,25 @@ function ProjectCard({ p, i }) {
 
 export default function Projects() {
   return (
-    <section id="work" className="relative py-24 md:py-40">
-      <div className="mx-auto max-w-7xl px-6 md:px-10">
+    <section id="work" className="relative py-24 md:py-40 overflow-hidden">
+      <div aria-hidden className="absolute inset-0 dot-grid opacity-40 pointer-events-none" />
+      <div aria-hidden className="absolute -top-40 right-0 h-[36rem] w-[36rem] rounded-full bg-accent/15 blob pointer-events-none" />
+      <div aria-hidden className="absolute -bottom-40 -left-20 h-[30rem] w-[30rem] rounded-full bg-[var(--color-accent-2)]/15 blob pointer-events-none" style={{ animationDelay: '-9s' }} />
+
+      <div className="relative mx-auto max-w-7xl px-6 md:px-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: false, margin: '-100px' }}
           transition={{ duration: 0.7 }}
           className="mb-16 md:mb-24 flex items-end justify-between gap-8 flex-wrap"
         >
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-4">— Selected work</p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-4 flex items-center gap-3">
+              <span className="inline-block h-px w-8 bg-accent" />
+              Selected work
+              <span className="text-accent">/ 03</span>
+            </p>
             <h2 className="font-display text-5xl md:text-8xl font-black tracking-tight text-balance">
               Things I've <span className="italic font-light text-accent">built</span>.
             </h2>
@@ -128,9 +145,10 @@ export default function Projects() {
             href="https://github.com/Vezice/alfi-portofolio/tree/main/Projects"
             target="_blank"
             rel="noreferrer"
-            className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim hover:text-accent transition-colors"
+            className="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-bone-dim hover:text-accent transition-colors"
           >
-            All notebooks →
+            All notebooks
+            <span className="inline-block transition-transform group-hover:translate-x-1">→</span>
           </a>
         </motion.div>
 

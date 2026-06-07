@@ -5,7 +5,7 @@ const milestones = [
   {
     year: 'Aug 2019',
     tag: 'Education',
-    title: 'B.S. Informatics — University of Brawijaya',
+    title: 'Bachelor of Informatics — University of Brawijaya',
     body: 'Started undergraduate studies in Informatics in Malang. The foundation that everything else builds on — algorithms, systems, the way code becomes products.',
   },
   {
@@ -98,34 +98,41 @@ function MilestoneRow({ m, i }) {
   const y = useTransform(scrollYProgress, [0, 1], [40, -40])
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3])
 
-  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.6])
+  const dotScale = useTransform(scrollYProgress, [0.4, 0.55], [1, 1.9])
   const dotColor = useTransform(scrollYProgress, [0.4, 0.55], ['#3a3a3a', '#ff4d6d'])
-  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 18px rgba(255,77,109,0.7)'])
+  const dotGlow = useTransform(scrollYProgress, [0.4, 0.55], ['0 0 0px rgba(255,77,109,0)', '0 0 20px rgba(255,77,109,0.8)'])
+  const dotInnerOpacity = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
+  const dotInnerScale = useTransform(scrollYProgress, [0.5, 0.6], [0, 1])
 
   const flipped = i % 2 === 1
-
   const imageClasses = flipped
-    ? 'md:col-span-5 md:col-start-1 md:row-start-1'
-    : 'md:col-span-5 md:col-start-8 md:row-start-1'
+    ? 'md:col-span-6 md:col-start-1 md:row-start-1'
+    : 'md:col-span-6 md:col-start-7 md:row-start-1'
   const textClasses = flipped
-    ? 'md:col-span-5 md:col-start-8 md:row-start-1'
-    : 'md:col-span-5 md:col-start-1 md:row-start-1'
+    ? 'md:col-span-6 md:col-start-7 md:row-start-1'
+    : 'md:col-span-6 md:col-start-1 md:row-start-1'
 
   return (
     <motion.li
       ref={ref}
       style={{ opacity }}
-      className="relative grid md:grid-cols-12 gap-6 md:gap-10 items-center py-10 md:py-20 pl-12 md:pl-0"
+      className="relative grid md:grid-cols-12 gap-x-12 md:gap-x-16 gap-y-6 items-center py-10 md:py-20 pl-12 md:pl-0"
     >
       <motion.span
         aria-hidden
         style={{ scale: dotScale, backgroundColor: dotColor, boxShadow: dotGlow }}
-        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-ink-soft z-30"
-      />
+        className="absolute left-4 md:left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-ink-soft z-30 flex items-center justify-center"
+      >
+        <motion.span
+          aria-hidden
+          style={{ opacity: dotInnerOpacity, scale: dotInnerScale }}
+          className="block h-1.5 w-1.5 rounded-full bg-white"
+        />
+      </motion.span>
 
       <motion.div style={{ scale, y }} className={`relative z-10 ${imageClasses}`}>
         <div
-          className={`relative w-full ${m.featured ? 'aspect-[4/3]' : 'aspect-video'} rounded-2xl overflow-hidden border ${m.featured ? 'border-accent/40' : 'border-white/10'} shadow-2xl shadow-black/40`}
+          className={`relative w-full ${m.featured ? 'aspect-[5/4]' : 'aspect-video'} rounded-2xl overflow-hidden border ${m.featured ? 'border-accent/40' : 'border-white/10'} shadow-2xl shadow-black/40`}
           style={{ background: gradients[i % gradients.length] }}
         >
           <div className="absolute inset-0 bg-gradient-to-tr from-ink/40 via-transparent to-transparent" />
@@ -141,7 +148,7 @@ function MilestoneRow({ m, i }) {
               {m.tag}
             </span>
             <div>
-              <p className="font-display text-5xl md:text-7xl font-black text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] leading-none">
+              <p className="font-display text-6xl md:text-8xl font-black text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.4)] leading-none">
                 {m.year}
               </p>
             </div>
@@ -153,7 +160,7 @@ function MilestoneRow({ m, i }) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: false, margin: '-80px' }}
           transition={{ duration: 0.6 }}
         >
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent mb-3">{m.year}</p>
@@ -173,6 +180,8 @@ export default function Journey() {
     target: olRef,
     offset: ['start center', 'end center'],
   })
+  const indicatorTop = useTransform(scrollYProgress, [0, 1], ['0%', '100%'])
+  const indicatorOpacity = useTransform(scrollYProgress, [0, 0.02, 0.98, 1], [0, 1, 1, 0])
 
   return (
     <section id="journey" className="relative bg-ink-soft py-24 md:py-40 border-y border-white/5 overflow-hidden">
@@ -180,7 +189,7 @@ export default function Journey() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
+          viewport={{ once: false, margin: '-100px' }}
           transition={{ duration: 0.7 }}
           className="mb-16 md:mb-24"
         >
@@ -188,8 +197,16 @@ export default function Journey() {
           <h2 className="font-display text-5xl md:text-8xl font-black tracking-tight text-balance">
             From <span className="italic font-light text-accent">2019</span> to now.
           </h2>
-          <p className="mt-6 max-w-2xl text-bone-dim text-lg text-pretty">
-            Brawijaya → Bangkit → published research → AHA Commerce. Six years of building, learning, and growing into the architect role.
+          <p className="mt-6 max-w-3xl text-bone-dim text-lg text-pretty">
+            <span className="text-bone">Graduation</span> —{' '}
+            <span className="text-accent font-medium">Brawijaya University</span> →{' '}
+            <span className="text-accent font-medium">Bangkit Academy</span> →{' '}
+            <span className="text-accent font-medium">Published Research at SENTRIN</span> →{' '}
+            <span className="text-accent font-medium">AHA Commerce</span>. Six years of building, learning, and{' '}
+            <span className="text-bone underline decoration-accent decoration-2 underline-offset-4">leading</span>{' '}
+            into the{' '}
+            <span className="text-bone underline decoration-accent decoration-2 underline-offset-4">architect</span>{' '}
+            role.
           </p>
         </motion.div>
 
@@ -203,6 +220,14 @@ export default function Journey() {
             style={{ scaleY: scrollYProgress }}
             className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-accent origin-top md:-translate-x-px z-0"
           />
+
+          <motion.span
+            aria-hidden
+            style={{ top: indicatorTop, opacity: indicatorOpacity }}
+            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-4 w-4 rounded-full bg-accent shadow-[0_0_28px_rgba(255,77,109,0.9)] z-40 you-are-here"
+          >
+            <span aria-hidden className="absolute inset-0 rounded-full bg-accent animate-ping opacity-50" />
+          </motion.span>
 
           {milestones.map((m, i) => (
             <MilestoneRow key={m.year + i} m={m} i={i} />

@@ -21,7 +21,7 @@ export default function Contact() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-6"
         >
@@ -30,7 +30,7 @@ export default function Contact() {
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.8 }}
           className="font-display text-6xl md:text-[10rem] font-black tracking-tighter leading-[0.9] text-balance"
         >
@@ -40,7 +40,7 @@ export default function Contact() {
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-8 max-w-xl mx-auto text-bone-dim text-lg text-pretty"
         >
@@ -50,7 +50,7 @@ export default function Contact() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mt-12 flex flex-wrap items-center justify-center gap-4"
         >
