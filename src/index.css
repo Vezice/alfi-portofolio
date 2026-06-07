@@ -75,4 +75,28 @@
     33%      { transform: translate(40px,-30px) scale(1.1); }
     66%      { transform: translate(-30px,40px) scale(0.95); }
   }
+
+  .scroll-blink {
+    animation: scroll-blink 1.6s ease-in-out infinite;
+  }
+  @keyframes scroll-blink {
+    0%, 100% { opacity: 0.35; transform: translate(-50%, 0); }
+    50%      { opacity: 1;    transform: translate(-50%, 4px); }
+  }
+
+  .hero-headline {
+    background-image:
+      radial-gradient(
+        circle 280px at var(--mx, -9999px) var(--my, -9999px),
+        var(--color-accent-3) 0%,
+        var(--color-accent) 35%,
+        transparent 70%
+      ),
+      linear-gradient(var(--color-bone), var(--color-bone));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    transition: background-position 80ms linear;
+  }
 }

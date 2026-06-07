@@ -13,7 +13,7 @@ import Footer from './components/Footer.jsx'
 
 export default function App() {
   useEffect(() => {
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true })
+    const lenis = new Lenis({ lerp: 0.18, wheelMultiplier: 1.4, smoothWheel: true })
     let rafId
     const raf = (time) => {
       lenis.raf(time)

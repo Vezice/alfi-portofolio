@@ -34,7 +34,7 @@ export default function About() {
         >
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-4">— About</p>
           <h2 className="font-display text-5xl md:text-7xl font-black tracking-tight mb-8 text-balance">
-            Aligning <span className="italic font-light text-accent">infrastructure</span> with autonomy.
+            Aligning <span className="italic font-light text-accent">Data &amp; AI</span> infrastructure to business needs.
           </h2>
           <div className="space-y-5 text-bone-dim text-lg text-pretty max-w-2xl">
             <p>
