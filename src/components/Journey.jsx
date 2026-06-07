@@ -125,7 +125,7 @@ function MilestoneRow({ m, i }) {
         <motion.span
           aria-hidden
           style={{ opacity: dotInnerOpacity, scale: dotInnerScale }}
-          className="block h-1 w-1 rounded-full bg-white"
+          className="block h-1.5 w-1.5 rounded-full bg-white"
         />
       </motion.span>
 
@@ -212,18 +212,18 @@ export default function Journey() {
         <ol ref={olRef} className="relative space-y-6 md:space-y-10">
           <span
             aria-hidden
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-px z-0"
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-white/25 z-0"
           />
           <motion.span
             aria-hidden
             style={{ scaleY: scrollYProgress }}
-            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-accent origin-top md:-translate-x-px z-0"
+            className="pointer-events-none absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-accent origin-top z-0"
           />
 
           <motion.span
             aria-hidden
             style={{ top: indicatorTop, opacity: indicatorOpacity }}
-            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2.5 w-2.5 rounded-full bg-accent shadow-[0_0_18px_rgba(255,77,109,0.9)] z-40"
+            className="pointer-events-none absolute left-4 md:left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-accent shadow-[0_0_14px_rgba(255,77,109,0.9)] z-40"
           />
 
           {milestones.map((m, i) => (
