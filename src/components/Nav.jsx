@@ -4,10 +4,11 @@ import { motion } from 'framer-motion'
 const BASE = import.meta.env.BASE_URL
 
 const links = [
-  { href: '#work', label: 'Work' },
-  { href: '#journey', label: 'Journey' },
-  { href: '#credentials', label: 'Credentials' },
   { href: '#about', label: 'About' },
+  { href: '#journey', label: 'Journey' },
+  { href: '#work', label: 'Work' },
+  { href: '#skills', label: 'Skills' },
+  { href: '#credentials', label: 'Credentials' },
   { href: '#contact', label: 'Contact' },
 ]
 
@@ -42,13 +43,22 @@ function SocialPill({ s }) {
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
+  const [open, setOpen] = useState(false)
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
+  useEffect(() => {
+    document.documentElement.style.overflow = open ? 'hidden' : ''
+    return () => {
+      document.documentElement.style.overflow = ''
+    }
+  }, [open])
+
   return (
+    <>
     <motion.header
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
@@ -86,8 +96,61 @@ export default function Nav() {
           >
             Resume
           </a>
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            className="lg:hidden relative h-10 w-10 inline-flex items-center justify-center rounded-full border border-white/15 hover:border-accent transition-colors"
+          >
+            <span
+              className={`absolute block h-px w-4 bg-bone transition-transform duration-300 ${open ? 'rotate-45' : '-translate-y-[3px]'}`}
+            />
+            <span
+              className={`absolute block h-px w-4 bg-bone transition-transform duration-300 ${open ? '-rotate-45' : 'translate-y-[3px]'}`}
+            />
+          </button>
         </div>
       </div>
     </motion.header>
+
+    <nav
+      id="mobile-menu"
+      ref={(el) => {
+        if (el) el.inert = !open
+      }}
+      className={`lg:hidden fixed inset-0 top-[72px] z-40 bg-ink/95 backdrop-blur-xl border-t border-white/5 flex flex-col transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+    >
+      <ul className="flex-1 flex flex-col justify-center gap-2 px-8">
+        {links.map((l, i) => (
+          <li
+            key={l.href}
+            className={`transition-[opacity,transform] duration-300 ease-out ${open ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+            style={{ transitionDelay: open ? `${80 + i * 50}ms` : '0ms' }}
+          >
+            <a
+              href={l.href}
+              onClick={() => setOpen(false)}
+              className="group flex items-baseline gap-4 py-3 font-display text-4xl font-black tracking-tight text-bone hover:text-accent transition-colors"
+            >
+              <span className="font-mono text-xs font-normal text-bone-dim tracking-[0.3em]">
+                0{i + 1}
+              </span>
+              {l.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <div
+        className={`px-8 pb-10 flex items-center gap-3 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0'}`}
+        style={{ transitionDelay: open ? '350ms' : '0ms' }}
+      >
+        {socials.map((s) => (
+          <SocialPill key={s.label} s={s} />
+        ))}
+      </div>
+    </nav>
+    </>
   )
 }

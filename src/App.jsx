@@ -4,8 +4,11 @@ import Cursor from './components/Cursor.jsx'
 import Nav from './components/Nav.jsx'
 import Hero from './components/Hero.jsx'
 import Marquee from './components/Marquee.jsx'
+import Stats from './components/Stats.jsx'
 import Projects from './components/Projects.jsx'
+import Publications from './components/Publications.jsx'
 import Journey from './components/Journey.jsx'
+import Skills from './components/Skills.jsx'
 import Credentials from './components/Credentials.jsx'
 import About from './components/About.jsx'
 import Contact from './components/Contact.jsx'
@@ -33,10 +36,13 @@ export default function App() {
       <main>
         <Hero />
         <Marquee />
-        <Projects />
-        <Journey />
-        <Credentials />
         <About />
+        <Stats />
+        <Journey />
+        <Projects />
+        <Publications />
+        <Skills />
+        <Credentials />
         <Contact />
       </main>
       <Footer />

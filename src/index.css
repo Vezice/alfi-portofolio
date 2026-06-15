@@ -17,6 +17,9 @@
 @layer base {
   html {
     scroll-behavior: auto;
+    /* framer-motion useScroll treats the document as the scroll container and
+       warns if it is static; relative here silences it without layout impact */
+    position: relative;
   }
   body {
     background: var(--color-ink);
