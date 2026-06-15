@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 
 const stats = [
   { value: '3 → 12', label: 'Team scaled as architect' },
-  { value: '6+', label: 'Years in data & ML' },
+  { value: '2', label: 'Years in Data & AI' },
   { value: '1', label: 'Peer-reviewed paper' },
   { value: '10', label: 'Certifications earned' },
 ]
