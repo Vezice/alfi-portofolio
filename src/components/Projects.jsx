@@ -6,35 +6,72 @@ const BASE = import.meta.env.BASE_URL
 const projects = [
   {
     no: '01',
-    title: 'Sign Language Recognition',
-    subtitle: 'CNN + Spatial Transformer Network',
-    body: 'Real-time ASL alphabet recognition. CNN trained in PyTorch, with a Spatial Transformer module that learns to focus on the hand region — robust against translation and small rotations.',
-    bullets: ['PyTorch', 'STN + CNN', 'Real-time inference', 'Published research'],
-    img: BASE + 'images/project-1.png',
-    paper: 'https://doi.org/10.25126/jtiik.1078098',
-    code: 'https://github.com/Vezice/Sign_Language_CNN_Spatial_Transformer',
+    title: 'AHABot',
+    subtitle: 'Autonomous Multi-Brand Pipeline & BigQuery Lakehouse',
+    body: 'Enterprise data extraction and ingestion engine across Lazada and marketplace seller centers. Integrates a three-tier AI architecture (Playwright, Gemini Flash, Gemini Pro) and an automated GCP event-driven pipeline streaming sales metrics directly into BigQuery.',
+    bullets: ['Three-Tier AI', 'GCS → Eventarc → BigQuery', 'GCP Pub/Sub Swarm', 'Automated BA Dash'],
+    img: BASE + 'images/project-ahabot.png',
+    code: 'https://github.com/Vezice',
   },
   {
     no: '02',
-    title: 'Naive Bayes vs Decision Tree',
-    subtitle: 'Classification benchmark on Car Evaluation',
-    body: 'Side-by-side implementation of Naive Bayes and ID3 Decision Tree on the Car Evaluation dataset. Naive Bayes edged out at 89.2% vs 88% — a study in where each method shines.',
-    bullets: ['89.2% NB accuracy', '88% Decision Tree (ID3)', 'Implemented from scratch'],
-    img: BASE + 'images/project-2.png',
-    paper: 'https://github.com/Vezice/alfi-portofolio/tree/main/Projects',
-    paperLabel: 'All projects',
-    code: 'https://github.com/Vezice/alfi-portofolio/blob/main/Projects/ML%20-%20Decision%20Tree.ipynb',
+    title: 'AHA Agents & Phoenix HQ',
+    subtitle: 'Desktop Automation Suite & Self-Healing Agent Supervisor',
+    body: 'Distributed marketplace automation suite packaged as a native Windows desktop GUI (pywebview) with automated CI/CD builds. Supervised by Phoenix HQ — an autonomous sentinel running on macOS that orchestrates up to 9 parallel browser instances, detects operational wedges, and triggers self-healing patch updates.',
+    bullets: ['Multi-Browser Parallelism', 'Phoenix Self-Healing HQ', 'PyInstaller CI/CD', 'Sentinel Monitoring'],
+    img: BASE + 'images/project-aha-agents.png',
+    code: 'https://github.com/Vezice',
   },
   {
     no: '03',
-    title: 'Iris Classification — Backprop ANN',
-    subtitle: 'From-scratch backpropagation',
-    body: 'Backpropagation artificial neural network applied to the classic Iris dataset. One-hot encoded labels, hand-rolled gradient descent — converging cleanly to 100% on the test split.',
-    bullets: ['100% test accuracy', 'One-hot encoded', 'Backprop from scratch'],
-    img: BASE + 'images/project-3.png',
-    paper: 'https://github.com/Vezice/alfi-portofolio/tree/main/Projects',
-    paperLabel: 'All projects',
-    code: 'https://github.com/Vezice/alfi-portofolio/blob/main/Projects/ANN%20-%20Backpropagation_2.ipynb',
+    title: 'AI Dashboard',
+    subtitle: 'Next.js 15 + Claude Adaptive Thinking Copilot',
+    body: 'Executive data analytics portal with interactive Recharts visualizations and glassmorphic styling, featuring an embedded "Ask Your Data" copilot powered by the streaming Claude API (claude-opus-4-8) with adaptive thinking to translate plain-English queries into real-time business insights.',
+    bullets: ['Next.js 15 (App Router)', 'React 19 + TypeScript', 'Claude Streaming API', 'Tailwind CSS v4 + Recharts'],
+    img: BASE + 'images/project-ai-dashboard.png',
+    code: 'https://github.com/Vezice',
+  },
+  {
+    no: '04',
+    title: 'Sign Language Recognition',
+    subtitle: 'CNN + Spatial Transformer Network',
+    body: 'Real-time ASL alphabet recognition. CNN trained in PyTorch, with a Spatial Transformer module that learns to focus on the hand region — robust against translation and small rotations. Peer-reviewed and published in JTIIK (SENTRIN 2023).',
+    bullets: ['PyTorch', 'STN + CNN', 'Real-time inference', 'Published research'],
+    img: BASE + 'images/project-1.png',
+    paper: 'https://doi.org/10.25126/jtiik.1078098',
+    paperLabel: 'Read the paper',
+    code: 'https://github.com/Vezice/Sign_Language_CNN_Spatial_Transformer',
+  },
+]
+
+const labItems = [
+  {
+    title: 'CIA Monitor App',
+    category: 'Engineering Intelligence',
+    body: 'Automated team velocity and health tracker monitoring private GitHub commits and Claude AI token consumption with balanced composite scoring. Zero-dependency architecture.',
+    tech: ['Python stdlib', 'SQLite WAL', 'macOS launchd', 'Zero deps'],
+    link: 'https://github.com/Vezice',
+  },
+  {
+    title: 'aha-mac Marketplace Cloud',
+    category: 'Cloud Microservice',
+    body: 'Operations platform deployed on Google Cloud Run (asia-southeast2) powering brand rotation schedules, marketplace calculations, and live BigQuery calculator integrations.',
+    tech: ['Google Cloud Run', 'Next.js BFF', 'Docker', 'Secret Manager'],
+    link: 'https://github.com/Vezice',
+  },
+  {
+    title: 'Voice Bridge & Local LLM',
+    category: 'Multi-Modal Agentics',
+    body: 'End-to-end bridge routing Discord DMs through a local Ollama (Qwen 2.5) triage filter into tmux Claude Code sessions, powered by a Silero VAD audio engine.',
+    tech: ['Ollama / Qwen 2.5', 'Discord API', 'Silero VAD', 'tmux'],
+    link: 'https://github.com/Vezice',
+  },
+  {
+    title: 'Foundational ML Notebooks',
+    category: 'Machine Learning',
+    body: 'Comprehensive series of 20 from-scratch Jupyter notebooks implementing foundational neural networks and algorithms: Hebb Net, Perceptron, Backprop, SOM, LVQ, Decision Trees, and LSTMs.',
+    tech: ['PyTorch', 'NumPy', 'Jupyter', 'Math Foundations'],
+    link: 'https://github.com/Vezice/alfi-portofolio/tree/main/Projects',
   },
 ]
 
@@ -93,26 +130,77 @@ function ProjectCard({ p, i }) {
           ))}
         </ul>
         <div className="flex items-center gap-6">
-          <a
-            href={p.paper}
-            target="_blank"
-            rel="noreferrer"
-            className="group/btn inline-flex items-center gap-2 text-bone hover:text-accent transition-colors"
-          >
-            {p.paperLabel || 'Read the paper'}
-            <span className="inline-block transition-transform group-hover/btn:translate-x-1">→</span>
-          </a>
-          <a
-            href={p.code}
-            target="_blank"
-            rel="noreferrer"
-            className="text-sm text-bone-dim hover:text-bone transition-colors underline underline-offset-4 decoration-white/20"
-          >
-            View code
-          </a>
+          {p.paper && (
+            <a
+              href={p.paper}
+              target="_blank"
+              rel="noreferrer"
+              className="group/btn inline-flex items-center gap-2 text-bone hover:text-accent transition-colors"
+            >
+              {p.paperLabel || 'Read the paper'}
+              <span className="inline-block transition-transform group-hover/btn:translate-x-1">→</span>
+            </a>
+          )}
+          {p.code && (
+            <a
+              href={p.code}
+              target="_blank"
+              rel="noreferrer"
+              className="text-sm text-bone-dim hover:text-bone transition-colors underline underline-offset-4 decoration-white/20"
+            >
+              {p.paper ? 'View code' : 'Explore project →'}
+            </a>
+          )}
         </div>
       </div>
     </motion.article>
+  )
+}
+
+function LabCard({ item, i }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: false, margin: '-60px' }}
+      transition={{ duration: 0.5, delay: (i % 2) * 0.08 }}
+      className="group relative p-7 md:p-8 rounded-2xl border border-white/5 bg-ink-soft/40 hover:border-accent/40 transition-colors flex flex-col justify-between"
+    >
+      <div>
+        <div className="flex items-center justify-between gap-4 mb-4">
+          <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-accent flex items-center gap-2">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent" />
+            {item.category}
+          </span>
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noreferrer"
+            aria-label={item.title}
+            className="text-bone-dim group-hover:text-accent transition-colors font-mono text-xs"
+          >
+            ↗
+          </a>
+        </div>
+        <h3 className="font-display text-2xl font-bold mb-3 text-balance group-hover:text-bone transition-colors">
+          {item.title}
+        </h3>
+        <p className="text-bone-dim text-sm leading-relaxed mb-6 text-pretty">
+          {item.body}
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2 pt-4 border-t border-white/5">
+        {item.tech.map((t) => (
+          <span
+            key={t}
+            className="text-[11px] font-mono tracking-wider px-2.5 py-1 rounded-full bg-white/[0.03] border border-white/5 text-bone-dim/90"
+          >
+            {t}
+          </span>
+        ))}
+      </div>
+    </motion.div>
   )
 }
 
@@ -135,7 +223,7 @@ export default function Projects() {
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-4 flex items-center gap-3">
               <span className="inline-block h-px w-8 bg-accent" />
               Selected work
-              <span className="text-accent">/ 03</span>
+              <span className="text-accent">/ 04</span>
             </p>
             <h2 className="font-display text-5xl md:text-8xl font-black tracking-tight text-balance">
               Things I've <span className="italic font-light text-accent">built</span>.
@@ -152,10 +240,41 @@ export default function Projects() {
           </a>
         </motion.div>
 
-        <div>
+        {/* Featured Hero Projects */}
+        <div className="mb-24 md:mb-36">
           {projects.map((p, i) => (
             <ProjectCard key={p.no} p={p} i={i} />
           ))}
+        </div>
+
+        {/* Lab & Micro-Systems Sub-Section */}
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: '-80px' }}
+            transition={{ duration: 0.6 }}
+            className="mb-10 md:mb-14 flex items-baseline justify-between flex-wrap gap-4"
+          >
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-bone-dim mb-3 flex items-center gap-2">
+                <span className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-accent-3)]" />
+                Explorations &amp; Internal Tooling
+              </p>
+              <h3 className="font-display text-3xl md:text-5xl font-black tracking-tight">
+                Lab &amp; <span className="italic font-light text-accent">Micro-Systems</span>.
+              </h3>
+            </div>
+            <p className="font-mono text-xs text-bone-dim tracking-wider uppercase">
+              4 Utilities &amp; Systems
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {labItems.map((item, i) => (
+              <LabCard key={item.title} item={item} i={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>
