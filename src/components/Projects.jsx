@@ -10,7 +10,6 @@ const projects = [
     subtitle: 'Autonomous Multi-Brand Pipeline & BigQuery Lakehouse',
     body: 'Enterprise data extraction and ingestion engine across Lazada and marketplace seller centers. Integrates a three-tier AI architecture (Playwright, Gemini Flash, Gemini Pro) and an automated GCP event-driven pipeline streaming sales metrics directly into BigQuery.',
     bullets: ['Three-Tier AI', 'GCS → Eventarc → BigQuery', 'GCP Pub/Sub Swarm', 'Automated BA Dash'],
-    img: BASE + 'images/project-ahabot.png',
     code: 'https://github.com/Vezice',
   },
   {
@@ -19,7 +18,6 @@ const projects = [
     subtitle: 'Desktop Automation Suite & Self-Healing Agent Supervisor',
     body: 'Distributed marketplace automation suite packaged as a native Windows desktop GUI (pywebview) with automated CI/CD builds. Supervised by Phoenix HQ — an autonomous sentinel running on macOS that orchestrates up to 9 parallel browser instances, detects operational wedges, and triggers self-healing patch updates.',
     bullets: ['Multi-Browser Parallelism', 'Phoenix Self-Healing HQ', 'PyInstaller CI/CD', 'Sentinel Monitoring'],
-    img: BASE + 'images/project-aha-agents.png',
     code: 'https://github.com/Vezice',
   },
   {
@@ -28,7 +26,6 @@ const projects = [
     subtitle: 'Next.js 15 + Claude Adaptive Thinking Copilot',
     body: 'Executive data analytics portal with interactive Recharts visualizations and glassmorphic styling, featuring an embedded "Ask Your Data" copilot powered by the streaming Claude API (claude-opus-4-8) with adaptive thinking to translate plain-English queries into real-time business insights.',
     bullets: ['Next.js 15 (App Router)', 'React 19 + TypeScript', 'Claude Streaming API', 'Tailwind CSS v4 + Recharts'],
-    img: BASE + 'images/project-ai-dashboard.png',
     code: 'https://github.com/Vezice',
   },
   {
@@ -105,13 +102,35 @@ function ProjectCard({ p, i }) {
           style={{ y }}
           className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-ink-soft border border-white/5"
         >
-          <img
-            src={p.img}
-            alt={p.title}
-            loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          />
-          <div className="absolute inset-0 bg-gradient-to-tr from-ink/60 via-transparent to-transparent" />
+          {p.img ? (
+            <>
+              <img
+                src={p.img}
+                alt={p.title}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-ink/60 via-transparent to-transparent" />
+            </>
+          ) : (
+            <div className="relative h-full w-full flex flex-col justify-between p-8 md:p-10 mesh-bg">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs tracking-[0.25em] uppercase text-accent flex items-center gap-2">
+                  <span className="inline-block h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  Production System
+                </span>
+                <span className="font-mono text-xs text-bone-dim/70 tracking-wider uppercase">Confidential Architecture</span>
+              </div>
+              <div className="my-auto">
+                <p className="font-display text-3xl md:text-5xl font-black text-bone mb-3 tracking-tight">{p.title}</p>
+                <p className="font-mono text-xs md:text-sm text-bone-dim tracking-wide">{p.subtitle}</p>
+              </div>
+              <div className="flex items-center justify-between text-bone-dim/60 font-mono text-[11px] tracking-widest uppercase border-t border-white/10 pt-4">
+                <span>Architecture</span>
+                <span>Tier 1 Enterprise</span>
+              </div>
+            </div>
+          )}
           <span className="absolute top-4 left-4 font-mono text-xs tracking-[0.2em] uppercase text-bone-dim">{p.no}</span>
         </motion.div>
       </div>
